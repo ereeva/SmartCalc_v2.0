@@ -113,16 +113,14 @@ TEST(Calc, test15) {
   ASSERT_NEAR(res, 8.5, 1e-7);
 }
 
-TEST(Calc, test16)
-{
+TEST(Calc, test16) {
   std::string expr = "sqrt(12+ln6)*(tanx+cos(log(5)))";
   calc.LoadExpression(expr);
   double res = calc.Calculate();
   ASSERT_NEAR(res, 2.84287688326, 1e-7);
 }
 
-TEST(Calc, test17)
-{
+TEST(Calc, test17) {
   std::string expr = "asin(0.3)+acos(0.7)*atan(0)";
   calc.LoadExpression(expr);
   double res = calc.Calculate();
