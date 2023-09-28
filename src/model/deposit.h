@@ -4,6 +4,7 @@
 #include <QDate>
 
 namespace s21 {
+/// @brief deposit calculator model
 class Deposit {
  public:
   Deposit() = default;

@@ -4,6 +4,7 @@
 #include <vector>
 
 namespace s21 {
+/// @brief credit calculator model
 class Credit {
  public:
   Credit() = default;

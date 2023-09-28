@@ -43,16 +43,16 @@ clean:
 	$(CLEAN) ../documentation
 	$(CLEAN) report*
 
-$(TEST_FILE): $(SOURCE) $(TEST)
-	$(CC) $(CPPFLAGS) $(SOURCE) $(TEST) -o $(TEST_FILE) $(TESTFLAGS)
+$(TEST_FILE): model/calc.cc model/credit.cc $(TEST)
+	$(CC) $(CPPFLAGS) model/calc.cc model/credit.cc $(TEST) -o $(TEST_FILE) $(TESTFLAGS)
 
 test: $(TEST_FILE)
 	./$(TEST_FILE)
 
 rebuild: clean all
 
-report/index.html: $(SOURCE) $(TEST)
-	$(CC) $(CPPFLAGS) $(GCOVFLAGS) $(SOURCE) $(TEST) -o $(TEST_FILE_COV) $(TESTFLAGS)
+report/index.html: model/calc.cc model/credit.cc $(TEST)
+	$(CC) $(CPPFLAGS) $(GCOVFLAGS) model/calc.cc model/credit.cc $(TEST) -o $(TEST_FILE_COV) $(TESTFLAGS)
 	./$(TEST_FILE_COV)
 	lcov -t "$(TEST_FILE_COV)" -o $(TEST_FILE_COV).info -c -d . --no-external --ignore-errors mismatch
 	genhtml -o report $(TEST_FILE_COV).info

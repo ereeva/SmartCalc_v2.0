@@ -4,7 +4,6 @@
 
 #include "../model/calc.h"
 #include "../model/credit.h"
-// #include "../model/deposit.h"
 
 s21::Calc calc;
 
@@ -106,8 +105,8 @@ TEST(Calc, test14) {
   ASSERT_NEAR(res, -12.0072, 1e-7);
 }
 
-TEST(Calc, test15)
-{s21::Calc a;
+TEST(Calc, test15) {
+  s21::Calc a;
   std::string expr = "53.5mod9";
   a.LoadExpression(expr);
   double res = a.Calculate();
@@ -116,12 +115,26 @@ TEST(Calc, test15)
 
 TEST(Calc, test16)
 {
-  std::string expr = "1+simx";
-  EXPECT_THROW(calc.LoadExpression(expr), std::logic_error);
+  std::string expr = "sqrt(12+ln6)*(tanx+cos(log(5)))";
+  calc.LoadExpression(expr);
+  double res = calc.Calculate();
+  ASSERT_NEAR(res, 2.84287688326, 1e-7);
 }
 
 TEST(Calc, test17)
 {
+  std::string expr = "asin(0.3)+acos(0.7)*atan(0)";
+  calc.LoadExpression(expr);
+  double res = calc.Calculate();
+  ASSERT_NEAR(res, 0.304692654, 1e-7);
+}
+
+TEST(Calc, test18) {
+  std::string expr = "1+simx";
+  EXPECT_THROW(calc.LoadExpression(expr), std::logic_error);
+}
+
+TEST(Calc, test19) {
   std::string expr = "1?2";
   EXPECT_THROW(calc.LoadExpression(expr), std::logic_error);
 }
@@ -149,16 +162,14 @@ TEST(Credit, differential) {
   ASSERT_NEAR(credit.Overpay(), 40000.00, 0.1);
 }
 
-TEST(Credit, test)
-{
+TEST(Credit, test) {
   s21::Credit a;
   a.Calculate(1000000, 7, 12, 0);
   std::vector<double> res = a.MonthlyPay();
   std::vector<double> cmp{152857.14, 151428.57, 150000.00, 148571.43,
                           147142.86, 145714.29, 144285.71};
   ASSERT_EQ(res.size(), cmp.size());
-  for (size_t i = 0; i < res.size(); ++i)
-    ASSERT_NEAR(res[i], cmp[i], 1e-2);
+  for (size_t i = 0; i < res.size(); ++i) ASSERT_NEAR(res[i], cmp[i], 1e-2);
 }
 
 int main(int argc, char *argv[]) {

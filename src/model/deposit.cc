@@ -72,7 +72,9 @@ void Deposit::Calculate() {
       yearly_gain += gain;
       gain = 0;
     }
-    if ((date.month() == start_date_.month() && date.day() == start_date_.day()) || date == end_date) {
+    if ((date.month() == start_date_.month() &&
+         date.day() == start_date_.day()) ||
+        date == end_date) {
       tax_ += CalculateTax(yearly_gain);
       yearly_gain = 0;
     }

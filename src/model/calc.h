@@ -29,6 +29,7 @@ enum TokenPriority {
   kMid,
   kHigh,
 };
+/// @brief main calculator model
 class Calc {
  public:
   Calc() = default;
